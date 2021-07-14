@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { IUser } from "../../entities/user";
 import { NoPhoto } from "../../helpers/imagesPack";
@@ -7,6 +7,7 @@ import { NoPhoto } from "../../helpers/imagesPack";
 import { getAllUsersApi } from "../../services/userApi";
 
 import { AppState } from "../../redux/store";
+import userActions from "../../redux/user/actions";
 
 import { Typography } from "../../components/ui-kit/typography";
 
@@ -15,20 +16,21 @@ import { MaterialTable, tableIcons } from "../../components/ui-kit/table";
 import { useStyles } from "./user.style";
 
 const User: React.FC = () => {
-  const [userData, setUserData] = useState<IUser[]>([]);
-
-  const { userColumns } = useSelector((state: AppState) => {
+  const dispatch = useDispatch();
+  const { userColumns, usersList } = useSelector((state: AppState) => {
     return {
       userColumns: state.User.columns,
+      usersList: state.User.users,
     };
   });
 
   useEffect(() => {
     const fetchUserData = async () => {
       const data = await getAllUsersApi();
-      setUserData(data);
+      dispatch(userActions.setUsers(data));
     };
     fetchUserData();
+    // eslint-disable-next-line
   }, []);
 
   const classes = useStyles();
@@ -112,7 +114,7 @@ const User: React.FC = () => {
                 : "rgba(210, 217, 226,0.15)",
           }),
         }}
-        data={userData}
+        data={usersList}
       />
     </div>
   );

@@ -73,7 +73,7 @@ const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
       handlePopoverClose();
     }
   };
-  console.log(newColumnValue);
+
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   return (

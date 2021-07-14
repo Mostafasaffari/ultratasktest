@@ -1,4 +1,9 @@
-import { CHANGE_COLUMNS, IUserState, UserActionTypes } from "./types";
+import {
+  CHANGE_COLUMNS,
+  IUserState,
+  SET_USERS,
+  UserActionTypes,
+} from "./types";
 
 const initState: IUserState = {
   columns: {
@@ -9,6 +14,7 @@ const initState: IUserState = {
     employmentType: true,
     hourlyRate: true,
   },
+  users: [],
 };
 
 const taskReducer = (state = initState, action: UserActionTypes) => {
@@ -19,6 +25,12 @@ const taskReducer = (state = initState, action: UserActionTypes) => {
         columns: {
           ...action.columns,
         },
+      };
+    }
+    case SET_USERS: {
+      return {
+        ...state,
+        users: action.users,
       };
     }
     default:
