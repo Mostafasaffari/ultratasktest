@@ -79,19 +79,21 @@ const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
   return (
     <AppBar
       className={clsx(classes.appBar, { [classes.appBarShift]: showSidebar })}
+      elevation={0}
     >
       <Toolbar className={classes.toolbar}>
         <div className={classes.wrap}>
-          <IconButton
-            className={classes.filterButton}
-            aria-label="Menu"
-            onClick={toggleDrawer}
-          >
-            <FilterListIcon />
-          </IconButton>
-
+          {!showSidebar && (
+            <IconButton
+              className={classes.filterButton}
+              aria-label="Menu"
+              onClick={toggleDrawer}
+            >
+              <FilterListIcon />
+            </IconButton>
+          )}
           <Typography component="h1" className={classes.headerTitle}>
-            Expert list
+            Users list
           </Typography>
         </div>
         <div></div>

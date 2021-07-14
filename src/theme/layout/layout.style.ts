@@ -119,10 +119,10 @@ const useHeaderStyle = makeStyles((theme: Theme) =>
   })
 );
 
-const useSidebarStyles = makeStyles(() =>
+const useSidebarStyles = makeStyles((theme: Theme) =>
   createStyles({
     swipeDrawerPaper: {
-      width: drawerWidth,
+      width: "100%",
     },
     drawer: {
       width: drawerWidth,
@@ -130,6 +130,40 @@ const useSidebarStyles = makeStyles(() =>
     },
     drawerPaper: {
       width: drawerWidth,
+      boxShadow: "5px 0 5px -6px #888",
+    },
+    headerDrawer: {
+      display: "flex",
+      position: "relative",
+      width: "100%",
+      padding: theme.spacing(3),
+      "& svg": {
+        fill: "#fff",
+        "&:hover": {
+          fill: "#000",
+        },
+      },
+    },
+    filterButton: {
+      background: "#0085FF",
+      width: 30,
+      height: 30,
+      marginRight: 7,
+      borderRadius: 5,
+    },
+    closeButton: {
+      position: "absolute",
+      top: 5,
+      right: 5,
+      "&:hover": {
+        background: "#fff",
+      },
+      "& svg": {
+        fill: "#000",
+        "&:hover": {
+          fill: "#ccc",
+        },
+      },
     },
   })
 );
