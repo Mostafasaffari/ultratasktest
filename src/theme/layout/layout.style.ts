@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     mainContent: {
       flexGrow: 0,
-      margin: "70px 20px",
+      margin: "80px 20px",
       height: "calc(100vh - 140px)",
       width: "100%",
       marginLeft: -drawerWidth + 20,
