@@ -101,7 +101,7 @@ const User: React.FC = () => {
           toolbar: false,
           search: false,
           sorting: true,
-          paging: true,
+          paging: false,
           actionsColumnIndex: -1,
           paginationType: "normal",
           showTitle: false,
