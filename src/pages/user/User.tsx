@@ -52,6 +52,7 @@ const User: React.FC = () => {
     {
       title: "Last name",
       field: "lastName",
+      hidden: !userColumns.lastName,
       cellStyle: () => ({
         border: "none",
       }),
@@ -59,6 +60,7 @@ const User: React.FC = () => {
     {
       title: "Job title",
       field: "jobTitle",
+      hidden: !userColumns.jobTitle,
       cellStyle: () => ({
         border: "none",
       }),
@@ -66,6 +68,7 @@ const User: React.FC = () => {
     {
       title: "Location",
       field: "location",
+      hidden: !userColumns.location,
       cellStyle: () => ({
         border: "none",
       }),
@@ -73,6 +76,7 @@ const User: React.FC = () => {
     {
       title: "Employment type",
       field: "employmentType",
+      hidden: !userColumns.employmentType,
       cellStyle: () => ({
         border: "none",
       }),
@@ -80,6 +84,7 @@ const User: React.FC = () => {
     {
       title: "Hourly rate(USD)",
       field: "hourlyRate",
+      hidden: !userColumns.hourlyRate,
       cellStyle: () => ({
         border: "none",
       }),

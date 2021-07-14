@@ -32,7 +32,7 @@ const useHeaderStyle = makeStyles((theme: Theme) =>
     appBar: {
       background: "rgba(0,0,0,0)",
       zIndex: theme.zIndex.drawer + 1,
-      "& $menuButton": {
+      "& $filterButton": {
         zIndex: 10,
       },
     },
@@ -44,7 +44,10 @@ const useHeaderStyle = makeStyles((theme: Theme) =>
         duration: theme.transitions.duration.enteringScreen,
       }),
     },
-
+    toolbar: {
+      display: "flex",
+      justifyContent: "space-between",
+    },
     wrap: {
       display: "flex",
       alignItems: "center",
@@ -55,12 +58,20 @@ const useHeaderStyle = makeStyles((theme: Theme) =>
         },
       },
     },
-    menuButton: {
+    filterButton: {
       background: "#0085FF",
       width: 30,
       height: 30,
       marginRight: 7,
       borderRadius: 5,
+    },
+    columnButton: {
+      background: "#EDF3FF",
+      width: 10,
+      height: 10,
+      borderRadius: 4,
+      color: "#0C1446",
+      marginLeft: 10,
     },
     headerTitle: {
       transition: "all 0.3s ease",
@@ -68,6 +79,30 @@ const useHeaderStyle = makeStyles((theme: Theme) =>
       textTransform: "capitalize",
       fontWeight: 700,
       color: "#000",
+    },
+    columnContainer: {
+      width: 350,
+      height: 250,
+
+      "& .titleheader": {
+        width: "100%",
+        height: 70,
+        background: "#F2F6F9",
+        padding: theme.spacing(1, 2),
+        display: "flex",
+        alignItems: "center",
+        "& .title": {
+          color: "#0085FF",
+        },
+      },
+      "& .actions": {
+        display: "flex",
+        justifyContent: "flex-end",
+        padding: 10,
+        "& button:first-child": {
+          marginRight: 10,
+        },
+      },
     },
   })
 );
