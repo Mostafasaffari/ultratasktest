@@ -1,0 +1,10 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "name": "Mostafa",
+      "lastname": "Saffari",
+      "picture": "https://picsum.photos/100/100"
+    }
+  ]
+}
