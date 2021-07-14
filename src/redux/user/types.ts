@@ -1,9 +1,9 @@
-import { IUser } from "../../entities/user";
+import { IColumnUser } from "../../entities/user";
 
 export const CHANGE_COLUMNS = "CHANGE_COLUMNS";
 
 export interface IUserState {
-  columns: Partial<{ [key in keyof IUser]: boolean }>;
+  columns: Required<{ [key in keyof IColumnUser]: boolean }>;
 }
 
 interface IChangeColumns {

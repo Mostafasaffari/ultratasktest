@@ -1,14 +1,27 @@
 import clsx from "clsx";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { IColumnUser } from "../../../entities/user";
+
+import { AppState } from "../../../redux/store";
+import userActions from "../../../redux/user/actions";
 
 import {
   FilterListIcon,
   ExpandMoreIcon,
+  CheckBoxIcon,
+  CheckBoxOutlineBlankIcon,
 } from "../../../components/ui-kit/icons";
 import { Popover } from "../../../components/ui-kit/popover";
 import { Typography } from "../../../components/ui-kit/typography";
 import { Button, IconButton } from "../../../components/ui-kit/button";
 import { AppBar, Toolbar } from "../../../components/ui-kit/appBar";
+import {
+  TextField,
+  Checkbox,
+  Autocomplete,
+} from "../../../components/ui-kit/input";
 
 import { useHeaderStyle } from "../layout.style";
 
@@ -20,6 +33,14 @@ interface IProps {
 const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
   const [columnsFilterPopover, setColumnsFilterPopover] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [newColumnValue, setNewColumnValue] = useState<string[]>([]);
+
+  const dispatch = useDispatch();
+  const { userColumns } = useSelector((state: AppState) => {
+    return {
+      userColumns: Object.keys(state.User.columns),
+    };
+  });
 
   const classes = useHeaderStyle();
 
@@ -35,8 +56,24 @@ const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
     setAnchorEl(null);
   };
 
-  const handleApplyColumns = () => {};
-
+  const handleApplyColumns = () => {
+    if (newColumnValue.length) {
+      const newColumns: Required<{ [key in keyof IColumnUser]: boolean }> = {
+        firstName: false,
+        lastName: false,
+        jobTitle: false,
+        location: false,
+        employmentType: false,
+        hourlyRate: false,
+      };
+      for (let c of newColumnValue) {
+        newColumns[c as keyof IColumnUser] = true;
+      }
+      dispatch(userActions.changeColumns(newColumns));
+      handlePopoverClose();
+    }
+  };
+  console.log(newColumnValue);
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   return (
@@ -90,7 +127,37 @@ const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
                   Show or hide columns
                 </Typography>
               </div>
-              <div></div>
+              <div className="selectColumn">
+                <Autocomplete
+                  multiple
+                  id="checkboxes-tags-demo"
+                  options={userColumns}
+                  disableCloseOnSelect
+                  getOptionLabel={(option) => option}
+                  value={newColumnValue.length ? newColumnValue : userColumns}
+                  onChange={(event, value) => setNewColumnValue(value)}
+                  renderOption={(option, { selected }) => (
+                    <>
+                      <Checkbox
+                        icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                        checkedIcon={<CheckBoxIcon fontSize="small" />}
+                        style={{ marginRight: 8 }}
+                        checked={selected}
+                      />
+                      {option}
+                    </>
+                  )}
+                  style={{ width: "100%" }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      label="columns"
+                      placeholder="Select columns"
+                    />
+                  )}
+                />
+              </div>
               <div className="actions">
                 <Button onClick={handlePopoverClose}>Cancel</Button>
 

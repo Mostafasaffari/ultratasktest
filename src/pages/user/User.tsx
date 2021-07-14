@@ -4,13 +4,15 @@ import { useSelector } from "react-redux";
 import { IUser } from "../../entities/user";
 import { NoPhoto } from "../../helpers/imagesPack";
 
+import { getAllUsersApi } from "../../services/userApi";
+
 import { AppState } from "../../redux/store";
 
 import { Typography } from "../../components/ui-kit/typography";
+
 import { MaterialTable, tableIcons } from "../../components/ui-kit/table";
 
 import { useStyles } from "./user.style";
-import { getAllUsersApi } from "../../services/userApi";
 
 const User: React.FC = () => {
   const [userData, setUserData] = useState<IUser[]>([]);

@@ -82,7 +82,7 @@ const useHeaderStyle = makeStyles((theme: Theme) =>
     },
     columnContainer: {
       width: 350,
-      height: 250,
+      height: 350,
 
       "& .titleheader": {
         width: "100%",
@@ -93,6 +93,18 @@ const useHeaderStyle = makeStyles((theme: Theme) =>
         alignItems: "center",
         "& .title": {
           color: "#0085FF",
+        },
+      },
+      "& .selectColumn": {
+        padding: theme.spacing(2),
+        "& .MuiChip-root": {
+          color: "#0C1446 !important",
+          height: 20,
+          background: "#fff",
+          border: "1px solid #ddd",
+        },
+        "& .MuiSvgIcon-root": {
+          display: "none",
         },
       },
       "& .actions": {
