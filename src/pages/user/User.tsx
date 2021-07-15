@@ -6,7 +6,7 @@ import { IUser } from "../../entities/user";
 import { NoPhoto } from "../../helpers/imagesPack";
 import { filterArray } from "../../helpers/filterArray";
 
-import { getAllUsersApi } from "../../services/userApi";
+import { deleteUserApi, getAllUsersApi } from "../../services/userApi";
 
 import { AppState } from "../../redux/store";
 import userActions from "../../redux/user/actions";
@@ -137,6 +137,16 @@ const User: React.FC = () => {
           }),
         }}
         data={usersWithFilters}
+        editable={{
+          onRowDelete: (oldData) =>
+            new Promise((resolve, reject) => {
+              setTimeout(async () => {
+                const users = await deleteUserApi(oldData.id);
+                dispatch(userActions.setUsers(users));
+                resolve(oldData);
+              }, 1000);
+            }),
+        }}
       />
       <div className={classes.buttonActions}>
         <Button
