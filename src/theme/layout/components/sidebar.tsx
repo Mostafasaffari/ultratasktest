@@ -1,9 +1,7 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-
-import { IColumnUser } from "../../../entities/user";
+import { useSelector, useDispatch } from "react-redux";
 
 import { AppState } from "../../../redux/store";
+import userActions from "../../../redux/user/actions";
 
 import { Drawer } from "../../../components/ui-kit/appBar";
 import { IconButton } from "../../../components/ui-kit/button";
@@ -18,24 +16,23 @@ interface IProps {
   showSidebar: boolean;
 }
 const SideBar: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
-  const [filters, setFilters] = useState<
-    Partial<{ [key in keyof IColumnUser]: any }>
-  >({});
-
+  const dispatch = useDispatch();
   const classes = useSidebarStyles();
 
-  const { usersList } = useSelector((state: AppState) => {
+  const { usersList, userFilters } = useSelector((state: AppState) => {
     return {
       usersList: state.User.users,
+      userFilters: state.User.filters,
     };
   });
 
   const handleChangeFilter =
     (key: string) => (event: React.ChangeEvent<{}>, value: any) => {
-      setFilters((p) => ({
-        ...p,
-        [key]: value,
-      }));
+      dispatch(
+        userActions.setFilters({
+          [key]: value,
+        })
+      );
     };
 
   return (
@@ -61,7 +58,7 @@ const SideBar: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
 
           <Typography component="h1" variant="h5">
             Filters
-            <Typography component="h6" variant="caption">
+            <Typography component="p" variant="caption">
               Pick or search by the filters below.
             </Typography>
           </Typography>
@@ -81,6 +78,7 @@ const SideBar: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
             multiple={true}
             options={Array.from(new Set(usersList.map((s) => s.firstName)))}
             onChange={handleChangeFilter("firstName")}
+            value={userFilters["firstName"] || []}
           />
           <SelectItems
             id="lastname-filter"
@@ -89,6 +87,7 @@ const SideBar: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
             multiple={true}
             options={Array.from(new Set(usersList.map((s) => s.lastName)))}
             onChange={handleChangeFilter("lastName")}
+            value={userFilters["lastName"] || []}
           />
           <SelectItems
             id="jobtitle-filter"
@@ -97,6 +96,9 @@ const SideBar: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
             multiple={false}
             options={Array.from(new Set(usersList.map((s) => s.jobTitle)))}
             onChange={handleChangeFilter("jobTitle")}
+            {...(userFilters["jobTitle"] && {
+              value: userFilters["jobTitle"],
+            })}
           />
           <SelectItems
             id="employmenttype-filter"
@@ -107,6 +109,9 @@ const SideBar: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
               new Set(usersList.map((s) => s.employmentType))
             )}
             onChange={handleChangeFilter("employmentType")}
+            {...(userFilters["employmentType"] && {
+              value: userFilters["employmentType"],
+            })}
           />
         </div>
       </div>

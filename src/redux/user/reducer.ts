@@ -1,6 +1,9 @@
+import { storage } from "../../helpers/localStorage";
+
 import {
   CHANGE_COLUMNS,
   IUserState,
+  SET_FILTERS,
   SET_USERS,
   UserActionTypes,
 } from "./types";
@@ -15,6 +18,7 @@ const initState: IUserState = {
     hourlyRate: true,
   },
   users: [],
+  filters: JSON.parse(storage.get("userFilters") ?? "{}"),
 };
 
 const taskReducer = (state = initState, action: UserActionTypes) => {
@@ -31,6 +35,22 @@ const taskReducer = (state = initState, action: UserActionTypes) => {
       return {
         ...state,
         users: action.users,
+      };
+    }
+    case SET_FILTERS: {
+      storage.set(
+        "userFilters",
+        JSON.stringify({
+          ...state.filters,
+          ...action.filters,
+        })
+      );
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          ...action.filters,
+        },
       };
     }
     default:

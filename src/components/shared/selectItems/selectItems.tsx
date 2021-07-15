@@ -27,7 +27,7 @@ const SelectItems: React.FC<IProps> = ({
       options={options}
       disableCloseOnSelect
       getOptionLabel={(option) => option}
-      value={value}
+      value={value || null}
       onChange={onChange}
       renderOption={(option, { selected }) => {
         if (multiple) {

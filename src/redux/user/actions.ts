@@ -1,4 +1,4 @@
-import { CHANGE_COLUMNS, IUserActions, SET_USERS } from "./types";
+import { CHANGE_COLUMNS, IUserActions, SET_FILTERS, SET_USERS } from "./types";
 
 const actions: IUserActions = {
   changeColumns: (columns) => ({
@@ -8,6 +8,10 @@ const actions: IUserActions = {
   setUsers: (users) => ({
     type: SET_USERS,
     users,
+  }),
+  setFilters: (filters) => ({
+    type: SET_FILTERS,
+    filters,
   }),
 };
 

@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IUser } from "../../entities/user";
+
 import { NoPhoto } from "../../helpers/imagesPack";
+import { filterArray } from "../../helpers/filterArray";
 
 import { getAllUsersApi } from "../../services/userApi";
 
@@ -10,28 +12,40 @@ import { AppState } from "../../redux/store";
 import userActions from "../../redux/user/actions";
 
 import { Typography } from "../../components/ui-kit/typography";
-
 import { MaterialTable, tableIcons } from "../../components/ui-kit/table";
 
 import { useStyles } from "./user.style";
 
 const User: React.FC = () => {
+  const [usersWithFilters, setUsersWithFilters] = useState<IUser[]>([]);
   const dispatch = useDispatch();
-  const { userColumns, usersList } = useSelector((state: AppState) => {
-    return {
-      userColumns: state.User.columns,
-      usersList: state.User.users,
-    };
-  });
+  const { userColumns, usersList, userFilters } = useSelector(
+    (state: AppState) => {
+      return {
+        userColumns: state.User.columns,
+        usersList: state.User.users,
+        userFilters: state.User.filters,
+      };
+    }
+  );
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const data = await getAllUsersApi();
+      let data = await getAllUsersApi();
       dispatch(userActions.setUsers(data));
     };
     fetchUserData();
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (Object.keys(userFilters).length) {
+      const users = filterArray(usersList, userFilters);
+      setUsersWithFilters(users);
+    } else {
+      setUsersWithFilters(usersList);
+    }
+  }, [userFilters, usersList]);
 
   const classes = useStyles();
   const columns = [
@@ -114,7 +128,7 @@ const User: React.FC = () => {
                 : "rgba(210, 217, 226,0.15)",
           }),
         }}
-        data={usersList}
+        data={usersWithFilters}
       />
     </div>
   );

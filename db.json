@@ -19,6 +19,16 @@
       "employmentType": "Fulltime",
       "hourlyRate": "199",
       "picture": "https://picsum.photos/100/100"
+    },
+    {
+      "id": 3,
+      "firstName": "UIX",
+      "lastName": "UIXY",
+      "jobTitle": "UI/UX",
+      "location": "Yerevan",
+      "employmentType": "PartTime",
+      "hourlyRate": "199",
+      "picture": "https://picsum.photos/100/100"
     }
   ]
 }
