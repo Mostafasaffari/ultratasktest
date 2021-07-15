@@ -3,6 +3,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CloseIcon from "@material-ui/icons/Close";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import SaveIcon from "@material-ui/icons/Save";
 
 export {
   FilterListIcon,
@@ -10,4 +12,6 @@ export {
   CheckBoxOutlineBlankIcon,
   CheckBoxIcon,
   CloseIcon,
+  AddCircleIcon,
+  SaveIcon,
 };

@@ -11,13 +11,18 @@ import { getAllUsersApi } from "../../services/userApi";
 import { AppState } from "../../redux/store";
 import userActions from "../../redux/user/actions";
 
+import { Modal } from "../../components/ui-kit/modal";
+import { Button } from "../../components/ui-kit/button";
+import { AddCircleIcon, SaveIcon } from "../../components/ui-kit/icons";
 import { Typography } from "../../components/ui-kit/typography";
+import { TextField, Select } from "../../components/ui-kit/input";
 import { MaterialTable, tableIcons } from "../../components/ui-kit/table";
 
-import { useStyles } from "./user.style";
+import { useStyles, BootstrapInput } from "./user.style";
 
 const User: React.FC = () => {
   const [usersWithFilters, setUsersWithFilters] = useState<IUser[]>([]);
+  const [showModalAddUser, setShowModalAddUser] = useState(false);
   const dispatch = useDispatch();
   const { userColumns, usersList, userFilters } = useSelector(
     (state: AppState) => {
@@ -130,6 +135,115 @@ const User: React.FC = () => {
         }}
         data={usersWithFilters}
       />
+      <div className={classes.buttonActions}>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<AddCircleIcon />}
+          onClick={() => setShowModalAddUser(true)}
+        >
+          Add a new user
+        </Button>
+        <Modal
+          open={showModalAddUser}
+          onClose={() => setShowModalAddUser(false)}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          className={classes.modal}
+        >
+          <div className={classes.paper}>
+            <div className="addUserHeader">
+              <Typography component="h5" variant="h5" color="primary">
+                Add new user
+              </Typography>
+              <Typography component="span" variant="caption">
+                Complete profile blow
+              </Typography>
+            </div>
+            <div className="row">
+              <div className="col">
+                <TextField
+                  required
+                  id="outlined-required"
+                  label="First name"
+                  variant="outlined"
+                  placeholder="e.g. Mostafa"
+                />
+                <TextField
+                  required
+                  id="outlined-required"
+                  label="Hourly rate"
+                  variant="outlined"
+                  placeholder="e.g. 199"
+                />
+                <div>
+                  <label className={classes.label} htmlFor="jobtitle">
+                    Job title
+                  </label>
+                  <Select
+                    id="demo-customized-select-native"
+                    input={<BootstrapInput />}
+                    native
+                    label="Job title"
+                    inputProps={{
+                      id: "jobtitle",
+                    }}
+                  >
+                    <option aria-label="None" value="" />
+                    <option value="Frontend">Frontend</option>
+                    <option value="UI/UX">UI/UX</option>
+                    <option value="Backend">Backend</option>
+                  </Select>
+                </div>
+              </div>
+              <div className="col">
+                <TextField
+                  required
+                  id="outlined-required"
+                  label="Last name"
+                  variant="outlined"
+                  placeholder="e.g. Saffari"
+                />
+                <TextField
+                  required
+                  id="outlined-required"
+                  label="location"
+                  variant="outlined"
+                  placeholder="e.g. Yerevan"
+                />
+                <div>
+                  <label htmlFor="employmentType" className={classes.label}>
+                    Employment type
+                  </label>
+                  <Select
+                    native
+                    id="demo-customized-select-native"
+                    input={<BootstrapInput />}
+                    label="Employment type"
+                    inputProps={{
+                      id: "employmentType",
+                    }}
+                  >
+                    <option aria-label="None" value="" />
+                    <option value="FullTime">FullTime</option>
+                    <option value="PartTime">PartTime</option>
+                    <option value="Contract">Contract</option>
+                  </Select>
+                </div>
+              </div>
+            </div>
+            <div className={classes.buttonActions}>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<SaveIcon />}
+              >
+                Save User
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      </div>
     </div>
   );
 };
