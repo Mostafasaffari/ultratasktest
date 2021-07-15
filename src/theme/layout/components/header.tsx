@@ -17,7 +17,7 @@ import { AppBar, Toolbar } from "../../../components/ui-kit/appBar";
 import { Button, IconButton } from "../../../components/ui-kit/button";
 import { SelectItems } from "../../../components/shared/selectItems/selectItems";
 
-import { useHeaderStyle } from "../layout.style";
+import { useHeaderStyle } from "./header.style";
 
 interface IProps {
   toggleDrawer: () => void;

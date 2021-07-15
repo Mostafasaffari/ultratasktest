@@ -9,7 +9,7 @@ import { Typography } from "../../../components/ui-kit/typography";
 import { FilterListIcon, CloseIcon } from "../../../components/ui-kit/icons";
 import { SelectItems } from "../../../components/shared/selectItems/selectItems";
 
-import { useSidebarStyles } from "../layout.style";
+import { useSidebarStyles } from "./sidebar.style";
 
 interface IProps {
   toggleDrawer: () => void;
