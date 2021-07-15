@@ -45,10 +45,12 @@ const User: React.FC = () => {
   useEffect(() => {
     if (Object.keys(userFilters).length) {
       const users = filterArray(usersList, userFilters);
+      dispatch(userActions.setUserFilterCount(users.length));
       setUsersWithFilters(users);
     } else {
       setUsersWithFilters(usersList);
     }
+    // eslint-disable-next-line
   }, [userFilters, usersList]);
 
   const classes = useStyles();

@@ -10,6 +10,7 @@ import userActions from "../../../redux/user/actions";
 import {
   FilterListIcon,
   ExpandMoreIcon,
+  CancelIcon,
 } from "../../../components/ui-kit/icons";
 import { Popover } from "../../../components/ui-kit/popover";
 import { Typography } from "../../../components/ui-kit/typography";
@@ -30,9 +31,10 @@ const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
   const [newColumnValue, setNewColumnValue] = useState<string[]>([]);
 
   const dispatch = useDispatch();
-  const { userColumns } = useSelector((state: AppState) => {
+  const { userColumns, userFilterCount } = useSelector((state: AppState) => {
     return {
       userColumns: Object.keys(state.User.columns),
+      userFilterCount: state.User.userFilterCount,
     };
   });
 
@@ -67,6 +69,9 @@ const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
       handlePopoverClose();
     }
   };
+  const handleClearFilter = () => {
+    dispatch(userActions.clearFilters());
+  };
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
@@ -89,6 +94,33 @@ const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
           <Typography component="h1" className={classes.headerTitle}>
             Users list
           </Typography>
+          {userFilterCount > 0 && (
+            <>
+              <Typography
+                component="h5"
+                variant="subtitle2"
+                color="primary"
+                className={classes.filterText}
+              >
+                Filterd Results{" "}
+                <Typography
+                  component="span"
+                  variant="subtitle1"
+                  color="textPrimary"
+                >
+                  ({userFilterCount})
+                </Typography>
+              </Typography>
+              <IconButton
+                aria-label="upload picture"
+                component="span"
+                className={classes.clearFilterButton}
+                onClick={handleClearFilter}
+              >
+                <CancelIcon fontSize="small" /> Clear all filters
+              </IconButton>
+            </>
+          )}
         </div>
         <div></div>
         <div>

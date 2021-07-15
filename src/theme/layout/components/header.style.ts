@@ -94,6 +94,22 @@ const useHeaderStyle = makeStyles((theme: Theme) =>
         },
       },
     },
+    filterText: {
+      marginLeft: theme.spacing(2),
+    },
+    clearFilterButton: {
+      fontSize: 14,
+      color: "red",
+      "&:hover": {
+        background: "#fff",
+      },
+      "& svg": {
+        fill: "red",
+        "&:hover": {
+          fill: "#ccc",
+        },
+      },
+    },
   })
 );
 

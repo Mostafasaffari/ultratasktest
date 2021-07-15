@@ -2,8 +2,10 @@ import { storage } from "../../helpers/localStorage";
 
 import {
   CHANGE_COLUMNS,
+  CLEAR_FILTERS,
   IUserState,
   SET_FILTERS,
+  SET_USERFILTER_COUNT,
   SET_USERS,
   UserActionTypes,
 } from "./types";
@@ -19,6 +21,7 @@ const initState: IUserState = {
   },
   users: [],
   filters: JSON.parse(storage.get("userFilters") ?? "{}"),
+  userFilterCount: Number(storage.get("countOfFilterUser")) ?? 0,
 };
 
 const taskReducer = (state = initState, action: UserActionTypes) => {
@@ -51,6 +54,21 @@ const taskReducer = (state = initState, action: UserActionTypes) => {
           ...state.filters,
           ...action.filters,
         },
+      };
+    }
+    case CLEAR_FILTERS: {
+      storage.clear("userFilters");
+      return {
+        ...state,
+        filters: {},
+        userFilterCount: 0,
+      };
+    }
+    case SET_USERFILTER_COUNT: {
+      storage.set("countOfFilterUser", JSON.stringify(action.count));
+      return {
+        ...state,
+        userFilterCount: action.count,
       };
     }
     default:

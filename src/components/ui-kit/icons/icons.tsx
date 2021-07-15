@@ -5,6 +5,7 @@ import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CloseIcon from "@material-ui/icons/Close";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import SaveIcon from "@material-ui/icons/Save";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 export {
   FilterListIcon,
@@ -14,4 +15,5 @@ export {
   CloseIcon,
   AddCircleIcon,
   SaveIcon,
+  CancelIcon,
 };

@@ -1,4 +1,11 @@
-import { CHANGE_COLUMNS, IUserActions, SET_FILTERS, SET_USERS } from "./types";
+import {
+  CHANGE_COLUMNS,
+  CLEAR_FILTERS,
+  IUserActions,
+  SET_FILTERS,
+  SET_USERFILTER_COUNT,
+  SET_USERS,
+} from "./types";
 
 const actions: IUserActions = {
   changeColumns: (columns) => ({
@@ -12,6 +19,13 @@ const actions: IUserActions = {
   setFilters: (filters) => ({
     type: SET_FILTERS,
     filters,
+  }),
+  clearFilters: () => ({
+    type: CLEAR_FILTERS,
+  }),
+  setUserFilterCount: (count) => ({
+    type: SET_USERFILTER_COUNT,
+    count,
   }),
 };
 
