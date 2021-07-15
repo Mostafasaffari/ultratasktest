@@ -130,6 +130,8 @@ const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
                   options={userColumns}
                   onChange={(event, value) => setNewColumnValue(value)}
                   multiple={true}
+                  placeholder="Select columns"
+                  label="Columns"
                 />
               </div>
               <div className="actions">

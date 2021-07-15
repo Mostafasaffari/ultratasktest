@@ -1,6 +1,6 @@
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -172,6 +172,11 @@ const useSidebarStyles = makeStyles((theme: Theme) =>
     filters: {
       display: "flex",
       flexDirection: "column",
+      padding: theme.spacing(3),
+      justifyContent: "space-around",
+      "& .MuiAutocomplete-root": {
+        padding: "10px 0",
+      },
     },
   })
 );

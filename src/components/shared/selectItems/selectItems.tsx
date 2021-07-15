@@ -5,6 +5,8 @@ import { TextField, Checkbox, Autocomplete } from "../../ui-kit/input";
 interface IProps {
   options: any[];
   multiple: boolean;
+  placeholder: string;
+  label: string;
   id: string;
   value?: any;
   onChange?: (event: React.ChangeEvent<{}>, value: any) => void;
@@ -15,6 +17,8 @@ const SelectItems: React.FC<IProps> = ({
   options,
   onChange,
   value,
+  placeholder,
+  label,
 }) => {
   return (
     <Autocomplete
@@ -25,24 +29,34 @@ const SelectItems: React.FC<IProps> = ({
       getOptionLabel={(option) => option}
       value={value}
       onChange={onChange}
-      renderOption={(option, { selected }) => (
-        <>
-          <Checkbox
-            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
-            checkedIcon={<CheckBoxIcon fontSize="small" />}
-            style={{ marginRight: 8 }}
-            checked={selected}
-          />
-          {option}
-        </>
-      )}
+      renderOption={(option, { selected }) => {
+        if (multiple) {
+          return (
+            <>
+              <Checkbox
+                icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                checkedIcon={<CheckBoxIcon fontSize="small" />}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+              {option}
+            </>
+          );
+        } else {
+          return (
+            <div>
+              <span>{option}</span>
+            </div>
+          );
+        }
+      }}
       style={{ width: "100%" }}
       renderInput={(params) => (
         <TextField
           {...params}
           variant="outlined"
-          label="columns"
-          placeholder="Select columns"
+          label={label}
+          placeholder={placeholder}
         />
       )}
     />
