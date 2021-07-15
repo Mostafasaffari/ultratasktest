@@ -6,7 +6,7 @@
       "lastName": "Saffari",
       "jobTitle": "Frontend",
       "location": "Yerevan",
-      "employmentType": "Fulltime",
+      "employmentType": "FullTime",
       "hourlyRate": "199",
       "picture": "https://picsum.photos/100/100"
     },
@@ -16,7 +16,7 @@
       "lastName": "Testy",
       "jobTitle": "Backend",
       "location": "Yerevan",
-      "employmentType": "Fulltime",
+      "employmentType": "FullTime",
       "hourlyRate": "199",
       "picture": "https://picsum.photos/100/100"
     },
@@ -28,6 +28,36 @@
       "location": "Yerevan",
       "employmentType": "PartTime",
       "hourlyRate": "199",
+      "picture": "https://picsum.photos/100/100"
+    },
+    {
+      "id": "6da39eea-15be-46a4-949c-69216fca9cd8",
+      "firstName": "testInsert",
+      "lastName": "test2",
+      "hourlyRate": 199,
+      "jobTitle": "Frontend",
+      "location": "Yerevan",
+      "employmentType": "FullTime",
+      "picture": "https://picsum.photos/100/100"
+    },
+    {
+      "id": "1c1bfa81-7887-40c6-bf0e-807d7f43f3ed",
+      "firstName": "test33",
+      "lastName": "test66",
+      "hourlyRate": 1999,
+      "jobTitle": "UI/UX",
+      "location": "Armenia",
+      "employmentType": "PartTime",
+      "picture": "https://picsum.photos/100/100"
+    },
+    {
+      "id": "7ccf8def-cf49-4a32-91d4-0d2e3b0994dc",
+      "firstName": "test66",
+      "lastName": "test777",
+      "hourlyRate": 199,
+      "jobTitle": "Frontend",
+      "location": "Armenia",
+      "employmentType": "Contract",
       "picture": "https://picsum.photos/100/100"
     }
   ]

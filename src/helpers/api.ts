@@ -24,7 +24,7 @@ class MyAPI<T> {
       return handleError(err);
     }
   }
-  public async post(url: string, data: any = {}): Promise<any> {
+  public async post(url: string, data: any = {}): Promise<T | any> {
     try {
       const response = await axios.post(url, data, this.config);
       return response.data;

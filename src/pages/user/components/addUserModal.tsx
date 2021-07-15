@@ -1,3 +1,11 @@
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+
+import { saveUsersApi } from "../../../services/userApi";
+
+import userActions from "../../../redux/user/actions";
+
 import { Modal } from "../../../components/ui-kit/modal";
 import { Button } from "../../../components/ui-kit/button";
 import { SaveIcon } from "../../../components/ui-kit/icons";
@@ -5,13 +13,48 @@ import { Typography } from "../../../components/ui-kit/typography";
 import { TextField, Select } from "../../../components/ui-kit/input";
 
 import { useStyles, BootstrapInput } from "../user.style";
-
 interface IProps {
   showModule: boolean;
   onClose: () => void;
 }
 const AddUserModal: React.FC<IProps> = ({ showModule, onClose }) => {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [location, setLocation] = useState("");
+  const [jobtitle, setJobtitle] = useState("");
+  const [employmenttype, setEmploymenttype] = useState("");
+  const [hourlyrate, setHourlyrate] = useState("");
+
+  const dispatch = useDispatch();
+
   const classes = useStyles();
+
+  const handleSaveUser = async () => {
+    if (
+      firstname &&
+      lastname &&
+      hourlyrate &&
+      jobtitle &&
+      location &&
+      employmenttype
+    ) {
+      const data = await saveUsersApi({
+        id: uuidv4(),
+        firstName: firstname,
+        lastName: lastname,
+        hourlyRate: Number(hourlyrate),
+        jobTitle: jobtitle,
+        location: location,
+        employmentType: employmenttype,
+        picture: "https://picsum.photos/100/100",
+      });
+      dispatch(userActions.setUsers(data));
+      onClose();
+    } else {
+      alert("Please fill all inputs!!!");
+    }
+  };
+
   return (
     <Modal
       open={showModule}
@@ -37,6 +80,9 @@ const AddUserModal: React.FC<IProps> = ({ showModule, onClose }) => {
               label="First name"
               variant="outlined"
               placeholder="e.g. Mostafa"
+              onChange={(e) => {
+                setFirstname(e.target.value as string);
+              }}
             />
             <TextField
               required
@@ -44,6 +90,9 @@ const AddUserModal: React.FC<IProps> = ({ showModule, onClose }) => {
               label="Hourly rate"
               variant="outlined"
               placeholder="e.g. 199"
+              onChange={(e) => {
+                setHourlyrate(e.target.value as string);
+              }}
             />
             <div>
               <label className={classes.label} htmlFor="jobtitle">
@@ -56,6 +105,9 @@ const AddUserModal: React.FC<IProps> = ({ showModule, onClose }) => {
                 label="Job title"
                 inputProps={{
                   id: "jobtitle",
+                }}
+                onChange={(e) => {
+                  setJobtitle(e.target.value as string);
                 }}
               >
                 <option aria-label="None" value="" />
@@ -72,6 +124,9 @@ const AddUserModal: React.FC<IProps> = ({ showModule, onClose }) => {
               label="Last name"
               variant="outlined"
               placeholder="e.g. Saffari"
+              onChange={(e) => {
+                setLastname(e.target.value as string);
+              }}
             />
             <TextField
               required
@@ -79,6 +134,9 @@ const AddUserModal: React.FC<IProps> = ({ showModule, onClose }) => {
               label="location"
               variant="outlined"
               placeholder="e.g. Yerevan"
+              onChange={(e) => {
+                setLocation(e.target.value as string);
+              }}
             />
             <div>
               <label htmlFor="employmentType" className={classes.label}>
@@ -92,6 +150,9 @@ const AddUserModal: React.FC<IProps> = ({ showModule, onClose }) => {
                 inputProps={{
                   id: "employmentType",
                 }}
+                onChange={(e) => {
+                  setEmploymenttype(e.target.value as string);
+                }}
               >
                 <option aria-label="None" value="" />
                 <option value="FullTime">FullTime</option>
@@ -102,7 +163,12 @@ const AddUserModal: React.FC<IProps> = ({ showModule, onClose }) => {
           </div>
         </div>
         <div className={classes.buttonActions}>
-          <Button variant="contained" color="primary" startIcon={<SaveIcon />}>
+          <Button
+            onClick={handleSaveUser}
+            variant="contained"
+            color="primary"
+            startIcon={<SaveIcon />}
+          >
             Save User
           </Button>
         </div>
