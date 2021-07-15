@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IUser } from "../../entities/user";
 
 import { NoPhoto } from "../../helpers/imagesPack";
-import { filterArray } from "../../helpers/filterArray";
+import { filterArray, hasFilter } from "../../helpers/filterArray";
 
 import { deleteUserApi, getAllUsersApi } from "../../services/userApi";
 
@@ -16,8 +16,8 @@ import { AddCircleIcon } from "../../components/ui-kit/icons";
 import { Typography } from "../../components/ui-kit/typography";
 import { MaterialTable, tableIcons } from "../../components/ui-kit/table";
 
-import { useStyles } from "./user.style";
 import { AddUserModal } from "./components/addUserModal";
+import { useStyles } from "./user.style";
 
 const User: React.FC = () => {
   const [usersWithFilters, setUsersWithFilters] = useState<IUser[]>([]);
@@ -43,11 +43,12 @@ const User: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (Object.keys(userFilters).length) {
+    if (Object.keys(userFilters).length && hasFilter(userFilters)) {
       const users = filterArray(usersList, userFilters);
       dispatch(userActions.setUserFilterCount(users.length));
       setUsersWithFilters(users);
     } else {
+      dispatch(userActions.setUserFilterCount(0));
       setUsersWithFilters(usersList);
     }
     // eslint-disable-next-line

@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { IColumnUser } from "../../../entities/user";
 
+import { hasFilter } from "../../../helpers/filterArray";
+
 import { AppState } from "../../../redux/store";
 import userActions from "../../../redux/user/actions";
 
@@ -31,12 +33,15 @@ const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
   const [newColumnValue, setNewColumnValue] = useState<string[]>([]);
 
   const dispatch = useDispatch();
-  const { userColumns, userFilterCount } = useSelector((state: AppState) => {
-    return {
-      userColumns: Object.keys(state.User.columns),
-      userFilterCount: state.User.userFilterCount,
-    };
-  });
+  const { userColumns, userFilterCount, filters } = useSelector(
+    (state: AppState) => {
+      return {
+        userColumns: Object.keys(state.User.columns),
+        userFilterCount: state.User.userFilterCount,
+        filters: state.User.filters,
+      };
+    }
+  );
 
   const classes = useHeaderStyle();
 
@@ -94,7 +99,7 @@ const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
           <Typography component="h1" className={classes.headerTitle}>
             Users list
           </Typography>
-          {userFilterCount > 0 && (
+          {hasFilter(filters) && (
             <>
               <Typography
                 component="h5"
