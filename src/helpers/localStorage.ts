@@ -1,7 +1,7 @@
 interface IStorage {
   get: (name: string) => string | null;
   set: (name: string, value: string) => void;
-  clear: (name: string) => void;
+  clear: (key: string) => void;
 }
 
 class MyLocalStorage implements IStorage {
@@ -11,8 +11,8 @@ class MyLocalStorage implements IStorage {
   set = (name: string, value: string) => {
     localStorage.setItem(name, value);
   };
-  clear = (name: string) => {
-    localStorage.setItem(name, "");
+  clear = (key: string) => {
+    localStorage.removeItem(key);
   };
 }
 
@@ -24,8 +24,8 @@ class CookieStorage implements IStorage {
   set = (name: string, value: string) => {
     this.setCookie(name, value);
   };
-  clear = (name: string) => {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  clear = (key: string) => {
+    document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   };
   private setCookie = (
     cookieName: string,
