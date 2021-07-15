@@ -57,6 +57,7 @@ const SideBar: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
             <CloseIcon />
           </IconButton>
         </div>
+        <div className={classes.filters}></div>
       </div>
     </Drawer>
   );

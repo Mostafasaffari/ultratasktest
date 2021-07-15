@@ -10,18 +10,12 @@ import userActions from "../../../redux/user/actions";
 import {
   FilterListIcon,
   ExpandMoreIcon,
-  CheckBoxIcon,
-  CheckBoxOutlineBlankIcon,
 } from "../../../components/ui-kit/icons";
 import { Popover } from "../../../components/ui-kit/popover";
 import { Typography } from "../../../components/ui-kit/typography";
-import { Button, IconButton } from "../../../components/ui-kit/button";
 import { AppBar, Toolbar } from "../../../components/ui-kit/appBar";
-import {
-  TextField,
-  Checkbox,
-  Autocomplete,
-} from "../../../components/ui-kit/input";
+import { Button, IconButton } from "../../../components/ui-kit/button";
+import { SelectItems } from "../../../components/shared/selectItems/selectItems";
 
 import { useHeaderStyle } from "../layout.style";
 
@@ -130,34 +124,12 @@ const Header: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
                 </Typography>
               </div>
               <div className="selectColumn">
-                <Autocomplete
-                  multiple
-                  id="checkboxes-tags-demo"
-                  options={userColumns}
-                  disableCloseOnSelect
-                  getOptionLabel={(option) => option}
+                <SelectItems
+                  id="checkboxes-columns"
                   value={newColumnValue.length ? newColumnValue : userColumns}
+                  options={userColumns}
                   onChange={(event, value) => setNewColumnValue(value)}
-                  renderOption={(option, { selected }) => (
-                    <>
-                      <Checkbox
-                        icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
-                        checkedIcon={<CheckBoxIcon fontSize="small" />}
-                        style={{ marginRight: 8 }}
-                        checked={selected}
-                      />
-                      {option}
-                    </>
-                  )}
-                  style={{ width: "100%" }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="outlined"
-                      label="columns"
-                      placeholder="Select columns"
-                    />
-                  )}
+                  multiple={true}
                 />
               </div>
               <div className="actions">

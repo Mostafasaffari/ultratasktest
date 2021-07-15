@@ -82,7 +82,8 @@ const useHeaderStyle = makeStyles((theme: Theme) =>
     },
     columnContainer: {
       width: 350,
-      height: 350,
+      height: 300,
+      position: "relative",
 
       "& .titleheader": {
         width: "100%",
@@ -111,6 +112,9 @@ const useHeaderStyle = makeStyles((theme: Theme) =>
         display: "flex",
         justifyContent: "flex-end",
         padding: 10,
+        position: "absolute",
+        bottom: 10,
+        right: 5,
         "& button:first-child": {
           marginRight: 10,
         },
@@ -164,6 +168,10 @@ const useSidebarStyles = makeStyles((theme: Theme) =>
           fill: "#ccc",
         },
       },
+    },
+    filters: {
+      display: "flex",
+      flexDirection: "column",
     },
   })
 );
