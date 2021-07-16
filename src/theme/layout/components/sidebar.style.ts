@@ -56,6 +56,23 @@ const useSidebarStyles = makeStyles((theme: Theme) =>
         padding: "10px 0",
       },
     },
+    hourlyRateFilter: {
+      display: "flex",
+      flexDirection: "column",
+      marginTop: theme.spacing(1),
+      "& >div": {
+        display: "flex",
+        marginTop: theme.spacing(1),
+        "& input": {
+          width: 70,
+          height: 30,
+          margin: theme.spacing(0, 2),
+          "&:first-child": {
+            marginLeft: theme.spacing(0),
+          },
+        },
+      },
+    },
   })
 );
 

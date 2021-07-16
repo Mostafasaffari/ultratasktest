@@ -34,6 +34,22 @@ const SideBar: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
         })
       );
     };
+  const handleChangehourlyRateFilter =
+    (key: "hourlyRateMin" | "hourlyRateMax") =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      let value = userFilters.hourlyRate || [];
+      if (key === "hourlyRateMin") {
+        value[0] = e.target.value;
+      }
+      if (key === "hourlyRateMax") {
+        value[1] = e.target.value;
+      }
+      dispatch(
+        userActions.setFilters({
+          hourlyRate: value,
+        })
+      );
+    };
 
   return (
     <Drawer
@@ -113,6 +129,30 @@ const SideBar: React.FC<IProps> = ({ toggleDrawer, showSidebar }) => {
               value: userFilters["employmentType"],
             })}
           />
+          <div className={classes.hourlyRateFilter}>
+            <label htmlFor="min">Horly rate (USD)</label>
+            <div>
+              <input
+                type="number"
+                id="min"
+                placeholder="min"
+                onChange={handleChangehourlyRateFilter("hourlyRateMin")}
+                {...(userFilters["hourlyRate"] > 0 && {
+                  value: userFilters["hourlyRate"][0],
+                })}
+              />{" "}
+              to{" "}
+              <input
+                type="number"
+                id="max"
+                placeholder="max"
+                onChange={handleChangehourlyRateFilter("hourlyRateMax")}
+                {...(userFilters["hourlyRate"] > 0 && {
+                  value: userFilters["hourlyRate"][1],
+                })}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </Drawer>

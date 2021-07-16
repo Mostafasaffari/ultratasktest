@@ -9,6 +9,20 @@ export function filterArray(
     return filterKeys.every((key) => {
       if (filters[key as keyof IColumnUser] instanceof Array) {
         if (!filters[key as keyof IColumnUser].length) return true;
+        if (key === "hourlyRate") {
+          if (
+            filters[key as keyof IColumnUser][0] === "" &&
+            filters[key as keyof IColumnUser][1] === ""
+          ) {
+            return true;
+          }
+          if (
+            item[key] > filters[key as keyof IColumnUser][0] &&
+            item[key] < filters[key as keyof IColumnUser][1]
+          ) {
+            return true;
+          }
+        }
         return filters[key as keyof IColumnUser].find(
           (filter: any) => filter === item[key]
         );

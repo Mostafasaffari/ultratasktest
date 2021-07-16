@@ -11,16 +11,6 @@
       "picture": "https://picsum.photos/100/100"
     },
     {
-      "id": 2,
-      "firstName": "Test",
-      "lastName": "Testy",
-      "jobTitle": "Backend",
-      "location": "Yerevan",
-      "employmentType": "FullTime",
-      "hourlyRate": "199",
-      "picture": "https://picsum.photos/100/100"
-    },
-    {
       "id": 3,
       "firstName": "UIX",
       "lastName": "UIXY",
