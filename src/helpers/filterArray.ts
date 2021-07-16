@@ -17,8 +17,8 @@ export function filterArray(
             return true;
           }
           if (
-            item[key] > filters[key as keyof IColumnUser][0] &&
-            item[key] < filters[key as keyof IColumnUser][1]
+            item[key] >= filters[key as keyof IColumnUser][0] &&
+            item[key] <= filters[key as keyof IColumnUser][1]
           ) {
             return true;
           }
@@ -46,7 +46,11 @@ export const hasFilter = (
   for (let key in filters) {
     if (filters[key as keyof IColumnUser] instanceof Array) {
       if (filters[key as keyof IColumnUser].length) {
-        return true;
+        return filters[key as keyof IColumnUser].every((filter: any) => {
+          if (filter) {
+            return true;
+          }
+        });
       }
     } else if (typeof filters[key as keyof IColumnUser] === "string") {
       if (filters[key as keyof IColumnUser]) {
